@@ -4,6 +4,15 @@ $(function() {
   var $window = $('.body-content');
   var $animation_elements = $('.animation');
 
+  var is_safari = navigator.userAgent.indexOf('Safari') != -1 && navigator.userAgent.indexOf('Chrome') == -1 &&  navigator.userAgent.indexOf('Android') == -1;
+
+  function add_class_no_animate_element_if_safari() {
+    $.each($animation_elements, function() {
+      var $element = $(this);
+      $element.addClass('no-animation');
+    });
+  }
+
   function write_animated_element_position() {
     $.each($animation_elements, function() {
       var $element = $(this);
@@ -30,6 +39,7 @@ $(function() {
       var element_top_position = element_data.topPosition;
       var element_bottom_position = element_data.bottomPosition;
       var animation;
+
       if (!scrollTop) {
         animation = element_data.animationDown;
       } else {
@@ -48,11 +58,19 @@ $(function() {
     });
   }
 
-  $window.on('ready', write_animated_element_position);
-  $window.on('scroll resize', check_if_in_view);
+
+  if (!is_safari) {
+    $window.on('ready', write_animated_element_position);
+    $window.on('scroll resize', check_if_in_view);
+  } else {
+    $window.on('ready', add_class_no_animate_element_if_safari);
+  }
 
   $window.trigger('ready');
-  $window.trigger('scroll');
+
+  if (!is_safari) {
+    $window.trigger('scroll');
+  }
 
   // smooth scroll
   $('a[href*="#"]:not([href="#"])').click(function() {

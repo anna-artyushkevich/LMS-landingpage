@@ -49,16 +49,12 @@
   }
 }
 
-@keyframes fadeInIcon {
-  from, to {
-    animation-timing-function: ease-in-out;
-  }
-
-  from {
+@keyframes fadeIn {
+  0% {
     opacity: 0;
   }
 
-  to {
+  100% {
     opacity: 1;
   }
 }
@@ -124,6 +120,10 @@
   animation-name: bounceIn;
 }
 
+.fadeIn {
+  animation-name: fadeIn;
+}
+
 .fadeInUp {
   animation-name: fadeInUp;
 }
@@ -144,6 +144,10 @@
 .animation {
   opacity: 0;
   transition: opacity 300ms ease-in-out;
+}
+
+.no-animation {
+  opacity: 1;
 }
 
 .in-view {
