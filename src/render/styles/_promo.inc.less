@@ -10,6 +10,13 @@
   }
 }
 
+// hack for IE10 and IE11
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+	.wrapper--promo {
+    min-height: auto;
+  }
+}
+
 .promo {
   color: @paper;
 
